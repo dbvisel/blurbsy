@@ -8,6 +8,7 @@ import BlurbFor from '../components/blurbfor';
 const BookInfo = styled.div`
 	display: flex;
 	justify-content: space-between;
+	margin-bottom: 16px;
 	& img {
 		height: 200px;
 		width: auto;
