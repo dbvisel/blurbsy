@@ -5,7 +5,7 @@ require('dotenv').config({
 module.exports = {
 	siteMetadata: {
 		title: `Blurbsy`,
-		description: `Blurbsy with WordPress backend.`,
+		description: `A way of examining the connections between blurbs`,
 		author: `Dan Visel <dbvisel@gmail.com>`
 	},
 	plugins: [
@@ -22,7 +22,7 @@ module.exports = {
 		{
 			resolve: `gatsby-plugin-manifest`,
 			options: {
-				name: `blurbsy`,
+				name: `Blurbsy`,
 				short_name: `blurbsy`,
 				start_url: `/`,
 				background_color: `#663399`,
@@ -37,7 +37,7 @@ module.exports = {
 				apiKey: process.env.GATSBY_AIRTABLE_APIKEY,
 				tables: [
 					{
-						baseId: `appvf9G01UWUiMFnA`,
+						baseId: process.env.GATSBY_AIRTABLE_BASEID,
 						tableName: `authors`,
 						tableView: 'Grid view',
 						tableLinks: [`BookLinks`, `BlurbLinks`] // optional, for deep linking to records across tables.
