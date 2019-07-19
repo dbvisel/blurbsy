@@ -23,6 +23,9 @@ exports.createPages = ({ graphql, actions }) => {
 							data {
 								Name
 								Title
+								Cover_Image {
+									filename
+								}
 							}
 						}
 					}

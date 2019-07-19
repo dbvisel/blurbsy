@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'gatsby';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
@@ -6,7 +7,14 @@ import SEO from '../components/seo';
 const IndexPage = () => (
 	<Layout>
 		<SEO title="Blurbsy" />
-		<h1>Blurbsy</h1>
+		<section>
+			<h2>Welcome to Blurbsy</h2>
+			<p>description paragraph?</p>
+			<p>
+				(try starting <Link to="/author/lsasekoff">here</Link>.)
+			</p>
+			<p>(should this have a list of authors/books?)</p>
+		</section>
 	</Layout>
 );
 

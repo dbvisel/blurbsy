@@ -6,4 +6,5 @@
 
 // You can delete this file if you're not using it
 
+import './src/css/sanitize.css';
 import './src/css/styles.css';

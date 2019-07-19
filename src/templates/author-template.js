@@ -1,7 +1,15 @@
 import React from 'react';
+import styled from 'styled-components';
 import { graphql, StaticQuery, Link } from 'gatsby';
 import Layout from '../components/layout';
+import BlurbFor from '../components/blurbfor';
+import BlurbBy from '../components/blurbby';
 import cleanName from '../components/cleanname';
+
+const BlurbDiv = styled.div`
+	margin-top: 16px;
+	margin-bottom: 16px;
+`;
 
 const getBlurbs = function(bookSection) {
 	let blurbs = [];
@@ -14,26 +22,25 @@ const getBlurbs = function(bookSection) {
 			});
 		}
 	}
-	console.log(blurbs);
 	return (
 		<div>
 			{blurbs.map((book, index) => (
-				<div key={index}>
+				<BlurbDiv key={index}>
 					<h3>
-						Blurbs for <em>{book.title}</em> ({book.publicationDate}):
+						Blurbs for{' '}
+						<Link to={`/book/${cleanName(book.title)}`}>
+							<em>{book.title}</em>
+						</Link>{' '}
+						({book.publicationDate}):
 					</h3>
 					{book.blurbs.map((thisBlurb, blurbIndex) => (
-						<div key={blurbIndex}>
-							<blockquote dangerouslySetInnerHTML={{ __html: thisBlurb.data.Blurb_text }} />
-							<p>
-								—
-								<Link to={`/author/${cleanName(thisBlurb.data.Blurber[0].data.Name)}`}>
-									{thisBlurb.data.Blurber[0].data.Name}
-								</Link>
-							</p>
-						</div>
+						<BlurbFor
+							key={blurbIndex}
+							blurb={thisBlurb.data.Blurb_text}
+							blurber={thisBlurb.data.Blurber[0].data.Name}
+						/>
 					))}
-				</div>
+				</BlurbDiv>
 			))}
 		</div>
 	);
@@ -110,7 +117,7 @@ const AuthorPage = props => {
 						authorInfo = nodes[i].node.data;
 					}
 				}
-				console.log(authorInfo);
+				// console.log(authorInfo);
 				return (
 					<Layout>
 						<section>
@@ -140,22 +147,13 @@ const AuthorPage = props => {
 							<div>
 								{authorInfo.BlurbLinks ? (
 									authorInfo.BlurbLinks.map((blurb, index) => (
-										<div key={index}>
-											<p>
-												<Link to={`/author/${cleanName(blurb.data.BookLink[0].data.AuthorLink[0].data.Name)}`}>
-													{blurb.data.BookLink[0].data.AuthorLink[0].data.Name}
-												</Link>
-												,{' '}
-												<em>
-													<Link to={`/book/${cleanName(blurb.data.BookLink[0].data.Title)}`}>
-														{blurb.data.BookLink[0].data.Title}
-													</Link>
-												</em>{' '}
-												({blurb.data.BookLink[0].data.Publication_Date}
-												):
-											</p>
-											<blockquote dangerouslySetInnerHTML={{ __html: blurb.data.Blurb_text }} />
-										</div>
+										<BlurbBy
+											key={index}
+											blurb={blurb.data.Blurb_text}
+											year={blurb.data.BookLink[0].data.Publication_Date}
+											blurbed={blurb.data.BookLink[0].data.AuthorLink[0].data.Name}
+											title={blurb.data.BookLink[0].data.Title}
+										/>
 									))
 								) : (
 									<p>(no blurbs)</p>
@@ -164,9 +162,9 @@ const AuthorPage = props => {
 						</section>
 						<section>
 							<h2>Blurbs for {authorInfo.Name}</h2>
-							<div>
+							<BlurbDiv>
 								{authorInfo.BookLinks ? getBlurbs(authorInfo.BookLinks) : <p>No blurbs for {authorInfo.Name}.</p>}
-							</div>
+							</BlurbDiv>
 						</section>
 					</Layout>
 				);
