@@ -13,6 +13,9 @@ const Wrapper = styled.main`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	@media screen and (max-width: 767px) {
+		padding: 10px;
+	}
 	& section {
 		background-color: var(--textColor);
 		padding: 16px;
@@ -23,7 +26,7 @@ const Wrapper = styled.main`
 		box-sizing: border-box;
 		@media screen and (max-width: 767px) {
 			border: none;
-			padding: 0;
+			padding: 8px;
 			& + section {
 				border-top: 1px solid var(--linkColor);
 				padding-top: 16px;
