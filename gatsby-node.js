@@ -37,11 +37,12 @@ exports.createPages = ({ graphql, actions }) => {
 
 			if (isBook || isAuthor) {
 				createPage({
-					path: isAuthor ? `/authors/${cleanName(node.data.Name)}` : `/books/${cleanName(node.data.Title)}`,
+					path: isAuthor ? `/author/${cleanName(node.data.Name)}` : `/book/${cleanName(node.data.Title)}`,
 					component: isAuthor
 						? path.resolve(`./src/templates/author-template.js`)
 						: path.resolve(`./src/templates/book-template.js`),
 					context: {
+						id: node.id,
 						data: node.data
 					}
 				});
