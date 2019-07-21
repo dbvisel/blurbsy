@@ -119,7 +119,7 @@ const AuthorPage = props => {
 				}
 				// console.log(authorInfo);
 				return (
-					<Layout>
+					<Layout title={authorInfo.Name}>
 						<section>
 							<h1>Author: {authorInfo.Name}</h1>
 							<h2>Bio:</h2>

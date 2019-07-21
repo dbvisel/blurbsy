@@ -51,9 +51,17 @@ const Footer = styled.footer`
 	box-sizing: border-box;
 	align-items: center;
 	color: var(--white);
+	text-align: center;
+	& p {
+		width: 100%;
+		& a {
+			color: var(--white);
+			font-weight: bold;
+		}
+	}
 `;
 
-const Layout = ({ children }) => {
+const Layout = props => {
 	const data = useStaticQuery(graphql`
 		query SiteTitleQuery {
 			site {
@@ -66,11 +74,13 @@ const Layout = ({ children }) => {
 
 	return (
 		<>
-			<Header siteTitle={data.site.siteMetadata.title} />
+			<Header siteTitle={data.site.siteMetadata.title} title={props.title} />
 			<MainWrapper>
-				<Wrapper>{children}</Wrapper>
+				<Wrapper>{props.children}</Wrapper>
 				<Footer>
-					<p>footer goes here</p>
+					<p>
+						A project by <a href="https://danvisel.net">Dan Visel</a>.
+					</p>
 				</Footer>
 			</MainWrapper>
 		</>

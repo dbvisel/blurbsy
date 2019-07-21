@@ -78,7 +78,7 @@ const BookPage = props => {
 				}
 				// console.log(bookInfo);
 				return (
-					<Layout>
+					<Layout title={bookInfo.Title}>
 						<section>
 							<BookInfo>
 								<div>

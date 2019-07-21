@@ -1,91 +1,16 @@
 # blurbsy
 
-This version is a Gatsby front end and a WordPress backend.
+This project uses a Gatsby front end and an Airtable backend. Airtable is maybe not the most sustainable backend? But it works right now & it's easy to use. Demo version: https://blurbsy.netlify.com
 
-TODO: figure out why blurb repeaters aren't coming across. This works in CBBE with basically the same setup?
+## making this work
 
-in Gatsby Node:
+The _gatsby-config.js_ file expects there to be a _.env.production_ and _.env.development_ file. Those files should look like this:
 
-1) make a page for every author
-2) make a page for every book
+GATSBY_AIRTABLE_APIKEY=[whatever the Airtable API key is]
+GATSBY_AIRTABLE_BASEID=[whatever the Airtable BaseID is]
 
-books:
+The Airtable I'm using right now has three tables: one for authors, one for books, and one for blurbs. 
 
-query Books {
-  allAirtable(filter: {table: {eq: "books"}}) {
-    edges {
-      node {
-        data {
-          Title
-          AuthorLink {
-            data {
-              Name
-            }
-          }
-          BlurbLinks {
-            data {
-            Blurb_text
-              Blurber {
-                data {
-                  Name
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
+## TODO:
 
-
-
-authors:
-
-query Authors {
-  allAirtable(filter: {table: {eq: "authors"}}) {
-    edges {
-      node {
-        table
-        data {
-          Name
-          Bio
-          books {
-            data {
-              Title
-            }
-          }
-          blurbs
-        }
-        id
-      }
-    }
-  }
-}
-
-blurbs:
-
-query Blurbs {
-  allAirtable(filter: {table: {eq: "blurbs"}}) {
-    edges {
-      node {
-        data {
-          Blurb_text
-          Blurber {
-            data {
-              Name
-            }
-            id
-          }
-          Book {
-            data {
-              Title
-            }
-            id
-          }
-        } 
-        id
-      }
-    }
-  }
-}
+ * on build, pull in book information from the LibraryThing API ( https://www.librarything.com/services/ )? Not sure how good that data is aside from covers.

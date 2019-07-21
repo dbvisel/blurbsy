@@ -6,6 +6,11 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 import cleanName from '../components/cleanname';
 
+const AuthorList = styled.ul`
+	margin: 0;
+	padding: 0;
+`;
+
 const AuthorName = styled.li`
 	display: inline-block;
 	&:after {
@@ -20,6 +25,17 @@ const AuthorName = styled.li`
 		}
 	}
 `;
+
+function compareNames(a, b) {
+	if (a.node.data.Name < b.node.data.Name) {
+		return -1;
+	}
+	if (a.node.data.Name > b.node.data.Name) {
+		return 1;
+	}
+	// a must be equal to b
+	return 0;
+}
 
 const IndexPage = () => {
 	return (
@@ -38,26 +54,26 @@ const IndexPage = () => {
 				}
 			`}
 			render={data => {
-				console.log(data);
 				return (
 					<Layout>
 						<SEO title="Blurbsy" />
 						<section>
-							<h2>Welcome to Blurbsy</h2>
-							<p>description paragraph?</p>
+							<h2>What is this?</h2>
+							<p>Blurbsy shows connections between authors who have blurbed each other.</p>
 						</section>
 						<section>
 							<h2>Authors:</h2>
-							<ul>
-								{data.allAirtable.edges.map((node, index) => (
+							<AuthorList>
+								{data.allAirtable.edges.sort(compareNames).map((node, index) => (
 									<AuthorName key={index}>
 										<Link to={`/author/${cleanName(node.node.data.Name)}`}>{node.node.data.Name}</Link>
 									</AuthorName>
 								))}
-							</ul>
+							</AuthorList>
 						</section>
 						<section>
-							<h3>Submit a blurb:</h3>
+							<h2>Submit a blurb:</h2>
+							<p>(I haven't done this yet.) </p>
 						</section>
 					</Layout>
 				);
