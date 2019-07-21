@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import Header from './header';
 
 const Wrapper = styled.main`
-	background-color: #a1fad0;
+	background-color: var(--backgroundColor);
 	padding: 20px;
 	height: 100%;
 	min-height: calc(100vh - 150px);
@@ -28,10 +28,8 @@ const Wrapper = styled.main`
 			border: none;
 			padding: 8px;
 			& + section {
-				border-top: 1px solid var(--linkColor);
-				padding-top: 16px;
-				margin-top: 16px;
-				border-radius: 0;
+				/* border-top: 1px solid var(--linkColor); */
+				margin-bottom: 8px;
 			}
 		}
 	}
@@ -79,7 +77,7 @@ const Layout = props => {
 				<Wrapper>{props.children}</Wrapper>
 				<Footer>
 					<p>
-						A project by <a href="https://danvisel.net">Dan Visel</a>.
+						<a href="/about">Blurbsy</a> is a project by <a href="https://danvisel.net">Dan Visel</a>.
 					</p>
 				</Footer>
 			</MainWrapper>

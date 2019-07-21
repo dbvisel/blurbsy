@@ -59,10 +59,10 @@ const IndexPage = () => {
 						<SEO title="Blurbsy" />
 						<section>
 							<h2>What is this?</h2>
-							<p>Blurbsy shows connections between authors who have blurbed each other.</p>
+							<p>Blurbsy shows connections between authors who have blurbed each other. <Link to="/about">Find out more about this project</Link>.</p>
 						</section>
 						<section>
-							<h2>Authors:</h2>
+							<h2>Authors ({data.allAirtable.edges.length}):</h2>
 							<AuthorList>
 								{data.allAirtable.edges.sort(compareNames).map((node, index) => (
 									<AuthorName key={index}>

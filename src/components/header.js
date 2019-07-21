@@ -10,7 +10,7 @@ const HeaderDiv = styled.header`
 	display: flex;
 	align-items: center;
 	background-color: var(--gray);
-	background-color: #6cc69c;
+	background-color: var(--headerColor);
 	justify-content: center;
 	& div {
 		width: 100%;
@@ -34,7 +34,7 @@ const Header = props => (
 	<HeaderDiv>
 		<div>
 			<h1>
-				<Link to="/">{props.title ? `${props.siteTitle}: ${props.title}` : props.siteTitle}</Link>
+				<Link to="/">{props.title ? `${props.title}` : props.siteTitle}</Link>
 			</h1>
 		</div>
 	</HeaderDiv>

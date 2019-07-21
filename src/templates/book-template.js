@@ -1,27 +1,8 @@
 import React from 'react';
-import { graphql, StaticQuery, Link } from 'gatsby';
-import styled from 'styled-components';
+import { graphql, StaticQuery } from 'gatsby';
 import Layout from '../components/layout';
-import cleanName from '../components/cleanname';
+import BookInfo from '../components/bookinfo';
 import BlurbFor from '../components/blurbfor';
-
-const BookInfo = styled.div`
-	display: flex;
-	justify-content: space-between;
-	margin-bottom: 16px;
-	& img {
-		height: 200px;
-		width: auto;
-		background-color: var(--gray);
-	}
-	@media screen and (max-width: 767px) {
-		flex-direction: column;
-		& img {
-			width: 100%;
-			height: auto;
-		}
-	}
-`;
 
 const BookPage = props => {
 	const thisId = props.pageContext.id;
@@ -80,28 +61,7 @@ const BookPage = props => {
 				return (
 					<Layout title={bookInfo.Title}>
 						<section>
-							<BookInfo>
-								<div>
-									<h3>
-										<Link to={`/author/${cleanName(bookInfo.AuthorLink[0].data.Name)}`}>
-											{bookInfo.AuthorLink[0].data.Name}
-										</Link>
-									</h3>
-									<h2>
-										<em>{bookInfo.Title}</em>
-									</h2>
-									<p>
-										{bookInfo.Publisher}, {bookInfo.Publication_Date}
-									</p>
-									<p>ISBN: {bookInfo.ISBN}</p>
-									<p>
-										<a href={bookInfo.URL} target="__blank">
-											Buy
-										</a>
-									</p>
-								</div>
-								<img src={bookInfo.Cover_Image[0].thumbnails.full.url} alt={bookInfo.Title} />
-							</BookInfo>
+							<BookInfo author={bookInfo.AuthorLink[0].data.Name}  title={bookInfo.Title} publisher={bookInfo.Publisher} publicationDate={bookInfo.Publication_Date} isbn={bookInfo.ISBN} url={bookInfo.URL} coverImage={bookInfo.Cover_Image ? bookInfo.Cover_Image[0].thumbnails.full.url : null} />
 							<p dangerouslySetInnerHTML={{ __html: bookInfo.Description }} />
 						</section>
 						<section>
