@@ -6,8 +6,8 @@ This project uses a Gatsby front end and an Airtable backend. Airtable is maybe 
 
 The _gatsby-config.js_ file expects there to be a _.env.production_ and _.env.development_ file. Those files should look like this:
 
-GATSBY_AIRTABLE_APIKEY=[whatever the Airtable API key is]
-GATSBY_AIRTABLE_BASEID=[whatever the Airtable BaseID is]
+    GATSBY_AIRTABLE_APIKEY=[whatever the Airtable API key is]
+    GATSBY_AIRTABLE_BASEID=[whatever the Airtable BaseID is]
 
 The Airtable I'm using right now has three tables: one for authors, one for books, and one for blurbs. 
 
