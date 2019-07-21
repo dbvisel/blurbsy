@@ -37,12 +37,22 @@ function compareNames(a, b) {
 	return 0;
 }
 
+function compareTitles(a, b) {
+	if (a.node.data.Title < b.node.data.Title) {
+		return -1;
+	}
+	if (a.node.data.Name > b.node.data.Name) {
+		return 1;
+	}
+	// a must be equal to b
+	return 0;
+}
 const IndexPage = () => {
 	return (
 		<StaticQuery
 			query={graphql`
-				query AuthorList {
-					allAirtable(filter: { table: { eq: "authors" } }) {
+				query {
+					AuthorList: allAirtable(filter: { table: { eq: "authors" } }) {
 						edges {
 							node {
 								data {
@@ -51,20 +61,47 @@ const IndexPage = () => {
 							}
 						}
 					}
+					BookList: allAirtable(filter: { table: { eq: "books" } }) {
+						edges {
+							node {
+								id
+							}
+						}
+					}
+					BlurbList: allAirtable(filter: { table: { eq: "blurbs" } }) {
+						edges {
+							node {
+								id
+							}
+						}
+					}
 				}
 			`}
 			render={data => {
+				console.log(data);
 				return (
 					<Layout>
 						<SEO title="Blurbsy" />
 						<section>
 							<h2>What is this?</h2>
-							<p>Blurbsy shows connections between authors who have blurbed each other. <Link to="/about">Find out more about this project</Link>.</p>
+							<p>
+								Blurbsy shows connections between authors who have blurbed each other.{' '}
+								<Link to="/about">Find out more about this project</Link>.
+							</p>
+							<h3>
+								<br />
+								Current stats:
+							</h3>
+							<ul>
+								<li>Authors: {data.AuthorList.edges.length}</li>
+								<li>Books: {data.BookList.edges.length}</li>
+								<li>Blurbs: {data.BlurbList.edges.length}</li>
+							</ul>
 						</section>
 						<section>
-							<h2>Authors ({data.allAirtable.edges.length}):</h2>
+							<h2>Authors ({data.AuthorList.edges.length}):</h2>
 							<AuthorList>
-								{data.allAirtable.edges.sort(compareNames).map((node, index) => (
+								{data.AuthorList.edges.sort(compareNames).map((node, index) => (
 									<AuthorName key={index}>
 										<Link to={`/author/${cleanName(node.node.data.Name)}`}>{node.node.data.Name}</Link>
 									</AuthorName>
