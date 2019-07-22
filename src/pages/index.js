@@ -33,20 +33,19 @@ function compareNames(a, b) {
 	if (a.node.data.Name > b.node.data.Name) {
 		return 1;
 	}
-	// a must be equal to b
 	return 0;
 }
 
-function compareTitles(a, b) {
-	if (a.node.data.Title < b.node.data.Title) {
-		return -1;
-	}
-	if (a.node.data.Name > b.node.data.Name) {
-		return 1;
-	}
-	// a must be equal to b
-	return 0;
-}
+// function compareTitles(a, b) {
+// 	if (a.node.data.Title < b.node.data.Title) {
+// 		return -1;
+// 	}
+// 	if (a.node.data.Name > b.node.data.Name) {
+// 		return 1;
+// 	}
+// 	return 0;
+// }
+
 const IndexPage = () => {
 	return (
 		<StaticQuery

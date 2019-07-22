@@ -13,4 +13,5 @@ The Airtable I'm using right now has three tables: one for authors, one for book
 
 ## TODO:
 
+ * figure out a way to get this information automatically?
  * on build, pull in book information from the LibraryThing API ( https://www.librarything.com/services/ )? Not sure how good that data is aside from covers.
