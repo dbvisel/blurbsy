@@ -2,6 +2,16 @@ require('dotenv').config({
 	path: `.env.${process.env.NODE_ENV}`
 });
 
+// for making search work:
+
+const { isNil } = require('lodash');
+
+const mapPagesUrls = {
+	index: '/'
+};
+
+// end of for making search work
+
 module.exports = {
 	siteMetadata: {
 		title: `Blurbsy`,
@@ -10,6 +20,27 @@ module.exports = {
 	},
 	plugins: [
 		`gatsby-plugin-react-helmet`,
+		{
+			resolve: 'gatsby-plugin-lunr',
+			options: { languages: [{ name: 'en' }] },
+			fields: [
+				{ name: 'title', store: true, attributes: { boost: 20 } },
+				{ name: 'description', store: true },
+				{ name: 'content', store: true },
+				{ name: 'url', store: true }
+			],
+			// A function for filtering nodes. () => true by default
+			filterNodes: node => !isNil(node.frontmatter),
+			resolvers: {
+				// For any node of type MarkdownRemark, list how to resolve the fields' values
+				MarkdownRemark: {
+					title: node => node.frontmatter.title,
+					description: node => node.frontmatter.description,
+					content: node => node.rawMarkdownBody,
+					url: node => mapPagesUrls[node.frontmatter.templateKey]
+				}
+			}
+		},
 		{
 			resolve: `gatsby-source-filesystem`,
 			options: {

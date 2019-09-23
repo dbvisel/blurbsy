@@ -15,3 +15,11 @@ The Airtable I'm using right now has three tables: one for authors, one for book
 
  * figure out a way to get this information automatically?
  * on build, pull in book information from the LibraryThing API ( https://www.librarything.com/services/ )? Not sure how good that data is aside from covers.
+ * use react-graph-viz to visualize this data.
+
+ ## Search: 
+
+  * https://github.com/humanseelabs/gatsby-plugin-lunr
+	* https://medium.com/humanseelabs/gatsby-v2-with-a-multi-language-search-plugin-ffc5e04f73bc
+	* https://www.gatsbyjs.org/packages/gatsby-plugin-lunr/
+	* https://assortment.io/posts/gatsby-site-search-lunr-js
